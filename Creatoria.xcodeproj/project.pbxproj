@@ -14,6 +14,28 @@
 		144CA0F32819371B0060A00D /* Creatoria.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 144CA0F12819371B0060A00D /* Creatoria.xcdatamodeld */; };
 		144CA0F52819371C0060A00D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144CA0F42819371C0060A00D /* Assets.xcassets */; };
 		144CA0F82819371C0060A00D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144CA0F62819371C0060A00D /* LaunchScreen.storyboard */; };
+		144CA16328194AAB0060A00D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA16228194AAB0060A00D /* Extension.swift */; };
+		144CA16528194C780060A00D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA16428194C780060A00D /* TabBarController.swift */; };
+		144CA1672819673B0060A00D /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA1662819673B0060A00D /* ProjectController.swift */; };
+		144CA179281980FA0060A00D /* AddImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA178281980FA0060A00D /* AddImageController.swift */; };
+		144CA17B281981160060A00D /* AddProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA17A281981160060A00D /* AddProjectController.swift */; };
+		144CA17D2819888F0060A00D /* AddVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA17C2819888F0060A00D /* AddVideoController.swift */; };
+		144CA17F281988A40060A00D /* AddSoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA17E281988A40060A00D /* AddSoundController.swift */; };
+		144CA18128199E410060A00D /* CatalogCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA18028199E410060A00D /* CatalogCategory.swift */; };
+		144CA1832819B05E0060A00D /* Project_detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CA1822819B05E0060A00D /* Project_detail.swift */; };
+		14838B06281AAEEF00C3971F /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B05281AAEEF00C3971F /* ProjectCell.swift */; };
+		14838B08281ABB4D00C3971F /* ProjectTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B07281ABB4D00C3971F /* ProjectTableCell.swift */; };
+		14838B0A281ACE4300C3971F /* AssetTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B09281ACE4300C3971F /* AssetTableCell.swift */; };
+		14838B3C281AEC0B00C3971F /* Asset_detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B3B281AEC0B00C3971F /* Asset_detail.swift */; };
+		14838B65281B17A400C3971F /* Projects+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B5D281B17A400C3971F /* Projects+CoreDataClass.swift */; };
+		14838B66281B17A400C3971F /* Projects+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B5E281B17A400C3971F /* Projects+CoreDataProperties.swift */; };
+		14838B67281B17A400C3971F /* AsseProj+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B5F281B17A400C3971F /* AsseProj+CoreDataClass.swift */; };
+		14838B68281B17A400C3971F /* AsseProj+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B60281B17A400C3971F /* AsseProj+CoreDataProperties.swift */; };
+		14838B69281B17A400C3971F /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B61281B17A400C3971F /* Folder+CoreDataClass.swift */; };
+		14838B6A281B17A400C3971F /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B62281B17A400C3971F /* Folder+CoreDataProperties.swift */; };
+		14838B6F281B1AEC00C3971F /* Assets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B6D281B1AEC00C3971F /* Assets+CoreDataClass.swift */; };
+		14838B70281B1AEC00C3971F /* Assets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B6E281B1AEC00C3971F /* Assets+CoreDataProperties.swift */; };
+		14838B72281B20A200C3971F /* AssetCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +48,28 @@
 		144CA0F42819371C0060A00D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		144CA0F72819371C0060A00D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		144CA0F92819371C0060A00D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		144CA16228194AAB0060A00D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		144CA16428194C780060A00D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		144CA1662819673B0060A00D /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
+		144CA178281980FA0060A00D /* AddImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageController.swift; sourceTree = "<group>"; };
+		144CA17A281981160060A00D /* AddProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectController.swift; sourceTree = "<group>"; };
+		144CA17C2819888F0060A00D /* AddVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoController.swift; sourceTree = "<group>"; };
+		144CA17E281988A40060A00D /* AddSoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSoundController.swift; sourceTree = "<group>"; };
+		144CA18028199E410060A00D /* CatalogCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCategory.swift; sourceTree = "<group>"; };
+		144CA1822819B05E0060A00D /* Project_detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_detail.swift; sourceTree = "<group>"; };
+		14838B05281AAEEF00C3971F /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		14838B07281ABB4D00C3971F /* ProjectTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableCell.swift; sourceTree = "<group>"; };
+		14838B09281ACE4300C3971F /* AssetTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableCell.swift; sourceTree = "<group>"; };
+		14838B3B281AEC0B00C3971F /* Asset_detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset_detail.swift; sourceTree = "<group>"; };
+		14838B5D281B17A400C3971F /* Projects+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Projects+CoreDataClass.swift"; sourceTree = "<group>"; };
+		14838B5E281B17A400C3971F /* Projects+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Projects+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		14838B5F281B17A400C3971F /* AsseProj+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsseProj+CoreDataClass.swift"; sourceTree = "<group>"; };
+		14838B60281B17A400C3971F /* AsseProj+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsseProj+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		14838B61281B17A400C3971F /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
+		14838B62281B17A400C3971F /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		14838B6D281B1AEC00C3971F /* Assets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assets+CoreDataClass.swift"; sourceTree = "<group>"; };
+		14838B6E281B1AEC00C3971F /* Assets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assets+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCellTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +102,46 @@
 		144CA0E72819371B0060A00D /* Creatoria */ = {
 			isa = PBXGroup;
 			children = (
+				144CA145281941C40060A00D /* Models */,
 				144CA0E82819371B0060A00D /* AppDelegate.swift */,
+				144CA16228194AAB0060A00D /* Extension.swift */,
+				14838B09281ACE4300C3971F /* AssetTableCell.swift */,
 				144CA0EA2819371B0060A00D /* SceneDelegate.swift */,
+				144CA16428194C780060A00D /* TabBarController.swift */,
+				144CA17E281988A40060A00D /* AddSoundController.swift */,
+				144CA17C2819888F0060A00D /* AddVideoController.swift */,
+				144CA17A281981160060A00D /* AddProjectController.swift */,
+				14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */,
+				14838B3B281AEC0B00C3971F /* Asset_detail.swift */,
+				144CA1822819B05E0060A00D /* Project_detail.swift */,
+				144CA178281980FA0060A00D /* AddImageController.swift */,
+				144CA18028199E410060A00D /* CatalogCategory.swift */,
 				144CA0EC2819371B0060A00D /* ViewController.swift */,
+				144CA1662819673B0060A00D /* ProjectController.swift */,
+				14838B07281ABB4D00C3971F /* ProjectTableCell.swift */,
 				144CA0EE2819371B0060A00D /* Main.storyboard */,
 				144CA0F42819371C0060A00D /* Assets.xcassets */,
 				144CA0F62819371C0060A00D /* LaunchScreen.storyboard */,
+				14838B05281AAEEF00C3971F /* ProjectCell.swift */,
 				144CA0F92819371C0060A00D /* Info.plist */,
 				144CA0F12819371B0060A00D /* Creatoria.xcdatamodeld */,
 			);
 			path = Creatoria;
+			sourceTree = "<group>";
+		};
+		144CA145281941C40060A00D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				14838B5D281B17A400C3971F /* Projects+CoreDataClass.swift */,
+				14838B5E281B17A400C3971F /* Projects+CoreDataProperties.swift */,
+				14838B5F281B17A400C3971F /* AsseProj+CoreDataClass.swift */,
+				14838B60281B17A400C3971F /* AsseProj+CoreDataProperties.swift */,
+				14838B6D281B1AEC00C3971F /* Assets+CoreDataClass.swift */,
+				14838B6E281B1AEC00C3971F /* Assets+CoreDataProperties.swift */,
+				14838B61281B17A400C3971F /* Folder+CoreDataClass.swift */,
+				14838B62281B17A400C3971F /* Folder+CoreDataProperties.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +215,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144CA1672819673B0060A00D /* ProjectController.swift in Sources */,
+				14838B6A281B17A400C3971F /* Folder+CoreDataProperties.swift in Sources */,
+				14838B67281B17A400C3971F /* AsseProj+CoreDataClass.swift in Sources */,
 				144CA0F32819371B0060A00D /* Creatoria.xcdatamodeld in Sources */,
 				144CA0ED2819371B0060A00D /* ViewController.swift in Sources */,
+				14838B66281B17A400C3971F /* Projects+CoreDataProperties.swift in Sources */,
+				14838B65281B17A400C3971F /* Projects+CoreDataClass.swift in Sources */,
+				144CA179281980FA0060A00D /* AddImageController.swift in Sources */,
+				144CA18128199E410060A00D /* CatalogCategory.swift in Sources */,
+				14838B0A281ACE4300C3971F /* AssetTableCell.swift in Sources */,
 				144CA0E92819371B0060A00D /* AppDelegate.swift in Sources */,
+				14838B68281B17A400C3971F /* AsseProj+CoreDataProperties.swift in Sources */,
+				14838B72281B20A200C3971F /* AssetCellTableViewCell.swift in Sources */,
 				144CA0EB2819371B0060A00D /* SceneDelegate.swift in Sources */,
+				14838B08281ABB4D00C3971F /* ProjectTableCell.swift in Sources */,
+				144CA16528194C780060A00D /* TabBarController.swift in Sources */,
+				144CA1832819B05E0060A00D /* Project_detail.swift in Sources */,
+				144CA17B281981160060A00D /* AddProjectController.swift in Sources */,
+				14838B06281AAEEF00C3971F /* ProjectCell.swift in Sources */,
+				144CA16328194AAB0060A00D /* Extension.swift in Sources */,
+				14838B70281B1AEC00C3971F /* Assets+CoreDataProperties.swift in Sources */,
+				144CA17D2819888F0060A00D /* AddVideoController.swift in Sources */,
+				144CA17F281988A40060A00D /* AddSoundController.swift in Sources */,
+				14838B69281B17A400C3971F /* Folder+CoreDataClass.swift in Sources */,
+				14838B3C281AEC0B00C3971F /* Asset_detail.swift in Sources */,
+				14838B6F281B1AEC00C3971F /* Assets+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

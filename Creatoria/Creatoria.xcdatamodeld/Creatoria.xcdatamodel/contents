@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AsseProj" representedClassName=".AsseProj" syncable="YES">
+        <attribute name="isSet" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="assets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assets" inverseName="intoProject" inverseEntity="Assets"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Projects" inverseName="assets" inverseEntity="Projects"/>
+    </entity>
+    <entity name="Assets" representedClassName=".Assets" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="file_extension" optional="YES" attributeType="String"/>
+        <attribute name="file_type" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="asset" inverseEntity="Folder"/>
+        <relationship name="intoProject" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AsseProj" inverseName="assets" inverseEntity="AsseProj"/>
+    </entity>
+    <entity name="Folder" representedClassName=".Folder" syncable="YES">
+        <attribute name="directory" optional="YES" attributeType="String"/>
+        <relationship name="asset" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Assets" inverseName="folder" inverseEntity="Assets"/>
+    </entity>
+    <entity name="Projects" representedClassName=".Projects" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="assets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AsseProj" inverseName="project" inverseEntity="AsseProj"/>
+    </entity>
+    <elements>
+        <element name="AsseProj" positionX="-339.1796875" positionY="250.359375" width="128" height="104"/>
+        <element name="Assets" positionX="77.74609375" positionY="-200.9765625" width="128" height="179"/>
+        <element name="Folder" positionX="-108" positionY="63" width="128" height="73"/>
+        <element name="Projects" positionX="332.94140625" positionY="-92.30859375" width="128" height="104"/>
+    </elements>
 </model>
