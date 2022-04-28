@@ -60,8 +60,8 @@ class Asset_detail: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         let alert = UIAlertController(title: "Delete Item", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {_ in
-
+        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {[self]_ in
+            self.deleteItem(item: asset!)
         }))
 
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: {_ in
@@ -81,6 +81,23 @@ class Asset_detail: UIViewController, UITableViewDelegate, UITableViewDataSource
         else
         {
             return asset?.assetInProject?.count ?? 0
+        }
+    }
+    
+    
+    func deleteItem(item: Assets)
+    {
+        context.delete(item)
+        
+        do
+        {
+            try context.save()
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        catch
+        {
+            
         }
     }
 
