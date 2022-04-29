@@ -7,7 +7,9 @@
 
 import UIKit
 
-class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    
     
     
     @IBOutlet var icon: UIImageView!
@@ -17,10 +19,16 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var addAsset: UIButton!
     @IBOutlet var detailTable : UITableView!
     
+    let screenWidth = UIScreen.main.bounds.width - 10
+    let screenHeight  = UIScreen.main.bounds.height / 2
+    var selectedRow = 0
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var segmentIndex = 0
     var project: Projects?
+    var assets =  [Assets]()
+    var chooseAsset = [Assets]()
     
     var type: [String] = ["Name", "Type"]
     var value = [String]()
@@ -136,6 +144,105 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
         else
         {
             return project?.assetArray?.count ?? 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    
+        let setAction : UITableViewRowAction
+        
+            if segmentIndex == 1
+            {
+                let setActionTitle = project?.assetArray?[indexPath.row].isSet ?? false ? "Unsset" : "Set"
+                setAction = UITableViewRowAction(style: .default, title: setActionTitle) { [self]_, indexPath in
+        
+                    if !(project?.assetArray?[indexPath.row].isSet ?? false) || project?.assetArray?[indexPath.row].isSet == nil
+                    {
+                        fetchAssets()
+                        
+                        for x in 0..<assets.count
+                        {
+                            if assets[x].file_type == project?.assetArray?[indexPath.row].type
+                            {
+                                chooseAsset.append(assets[x])
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    else
+                    
+                    {
+                        let alert = UIAlertController(title: "Are you sure?", message: "The asset will be unlinked from the project", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [self]_ in
+                            
+                            project?.assetArray?[indexPath.row].assets = nil
+                            project?.assetArray?[indexPath.row].isSet = false
+                        }))
+                    }
+                }
+            }
+        
+        else
+        {
+            setAction = UITableViewRowAction(style: .default, title: "Check", handler: { _, indexPath in
+                
+            })
+        }
+            
+        return [setAction]
+       
+    }
+    
+    func pickerViewPop()
+    {
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+        
+        vc.view.addSubview(pickerView)
+        pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
+        pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
+        
+        let alert = UIAlertController(title: "Select Asset to set into Project", message: "", preferredStyle: .actionSheet)
+        
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
+        label.text = chooseAsset[row].name
+        label.sizeToFit()
+        return label
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        chooseAsset.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 60
+    }
+    
+    func fetchAssets()
+    {
+        do
+        {
+            assets = try context.fetch(Assets.fetchRequest())
+        }
+        
+        catch
+        {
+            
         }
     }
     
