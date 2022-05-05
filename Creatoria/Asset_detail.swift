@@ -14,6 +14,7 @@ class Asset_detail: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var segmentView: UISegmentedControl!
     @IBOutlet var desc : UILabel!
     @IBOutlet var detailTable : UITableView!
+    @IBOutlet var headText : UILabel!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -53,6 +54,17 @@ class Asset_detail: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func didChangeSegment(_ sender: UISegmentedControl)
     {
         segmentIndex = sender.selectedSegmentIndex
+        
+        if segmentIndex == 0
+        {
+            let directory : String = asset?.folder?.directory ?? ""
+            headText.text = "File folder: \(directory)"
+        }
+        
+        else
+        {
+            headText.text = "Project                                                  Usage"
+        }
         detailTable.reloadData()
     }
 
