@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
@@ -27,7 +28,6 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var segmentIndex = 0
     var project: Projects?
-    var assets =  [Assets]()
     var chooseAsset = [Assets]()
     
     var type: [String] = ["Name", "Type"]
@@ -155,23 +155,57 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 let setActionTitle = project?.assetArray?[indexPath.row].isSet ?? false ? "Unsset" : "Set"
                 setAction = UITableViewRowAction(style: .default, title: setActionTitle) { [self]_, indexPath in
+                    
+                    print(project?.assetArray?[indexPath.row].type)
         
                     if !(project?.assetArray?[indexPath.row].isSet ?? false) || project?.assetArray?[indexPath.row].isSet == nil
                     {
-                        fetchAssets()
+                        let typeOfAsset: String = project?.assetArray?[indexPath.row].type ?? "Image"
+                        fetchAssets(typeOfAsset: typeOfAsset)
                         
-                        for x in 0..<assets.count
-                        {
-                            if assets[x].file_type == project?.assetArray?[indexPath.row].type
+                        let vc = UIViewController()
+                        vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
+                        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+                        pickerView.delegate = self
+                        pickerView.dataSource = self
+                        
+                        pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
+                        
+                        vc.view.addSubview(pickerView)
+                        pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
+                        pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
+                        
+                        let alert = UIAlertController(title: "Select Asset to set into Project", message: "", preferredStyle: .actionSheet)
+                        
+                        alert.setValue(vc, forKey: "contentViewController")
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                            self.chooseAsset.removeAll()
+                            alert.dismiss(animated: true)
+                        }))
+                        
+                        alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { [self]_ in
+                            selectedRow = pickerView.selectedRow(inComponent: 0)
+                            project?.assetArray?[indexPath.row].isSet = true
+                            project?.assetArray?[indexPath.row].assets = chooseAsset[selectedRow]
+                            
+                            do
                             {
-                                chooseAsset.append(assets[x])
+                                try context.save()
+                                detailTable.reloadData()
                             }
-                        }
+                            
+                            catch
+                            {
+                                
+                            }
+                        }))
+                        
+                        self.present(alert, animated: true)
                         
                         
                     }
                     
-                    else
+                    else if project?.assetArray?[indexPath.row].isSet == true
                     
                     {
                         let alert = UIAlertController(title: "Are you sure?", message: "The asset will be unlinked from the project", preferredStyle: .alert)
@@ -179,7 +213,22 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
                             
                             project?.assetArray?[indexPath.row].assets = nil
                             project?.assetArray?[indexPath.row].isSet = false
+                            
+                            do
+                            {
+                                try context.save()
+                                detailTable.reloadData()
+                            }
+                            catch
+                            {
+                                
+                            }
                         }))
+                        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
+                            alert.dismiss(animated: true)
+                        }))
+                        
+                        self.present(alert, animated: true)
                     }
                 }
             }
@@ -190,27 +239,11 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
                 
             })
         }
+        
+        setAction.backgroundColor = UIColor.sunnyYellow
             
         return [setAction]
        
-    }
-    
-    func pickerViewPop()
-    {
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
-        pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
-        
-        vc.view.addSubview(pickerView)
-        pickerView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
-        pickerView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
-        
-        let alert = UIAlertController(title: "Select Asset to set into Project", message: "", preferredStyle: .actionSheet)
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -220,7 +253,10 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
-        label.text = chooseAsset[row].name
+        
+        let name : String = chooseAsset[row].name ?? ""
+        let ext : String = chooseAsset[row].file_extension ?? ""
+        label.text = "\(name).\(ext)"
         label.sizeToFit()
         return label
     }
@@ -233,11 +269,17 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
         return 60
     }
     
-    func fetchAssets()
+    
+    func fetchAssets(typeOfAsset : String)
     {
         do
         {
-            assets = try context.fetch(Assets.fetchRequest())
+            let filteredRequest: NSFetchRequest<Assets> = Assets.fetchRequest()
+            let pred = NSPredicate(format: "file_type CONTAINS '\(typeOfAsset)'")
+            
+            filteredRequest.predicate = pred
+            
+            self.chooseAsset = try context.fetch(filteredRequest)
         }
         
         catch

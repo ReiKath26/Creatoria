@@ -9,7 +9,8 @@ import UIKit
 import CoreData
 
 
-class ProjectController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class ProjectController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate
+{
     
     var projects = [Projects]()
     var allAssets = [AsseProj]()
@@ -39,6 +40,10 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return projects.count
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchProject()
+    }
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,16 +59,15 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
         }
         
         let assetCount = projAssets.count
-        var unsetAssetCount = 0
+        var setAssetCount = 0
         
         if !projAssets.isEmpty
         {
             for y in 0..<projAssets.count
             {
-                if !projAssets[y].isSet
+                if projAssets[y].isSet
                 {
-                    unsetAssetCount = 0
-                    unsetAssetCount = unsetAssetCount + 1
+                    setAssetCount = setAssetCount + 1
                 }
             }
             
@@ -75,7 +79,7 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
         cell.imageIcon.image = UIImage(systemName: projects[indexPath.row].symbol ?? "snowflake")
         cell.imageIcon.tintColor = UIColor.periwinkle
         cell.buttonTitle.setTitle(projects[indexPath.row].name, for: .normal)
-        cell.assetSet.text = "\(unsetAssetCount)/\(assetCount) Assets Setted"
+        cell.assetSet.text = "\(setAssetCount)/\(assetCount) Assets Setted"
 //        let shapeLayer = CAShapeLayer()
 //
 //        let center = cell.center
@@ -124,7 +128,6 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
     {
         fetchProject()
         fetchProjectAsset()
-        print(projects.count)
         
         if projects.isEmpty
         {
@@ -181,6 +184,44 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBar.showsCancelButton = true
+        
+        if searchText == ""
+        {
+            fetchProject()
+        }
+        
+        else
+        {
+            projects = []
+            
+            do
+            {
+                let filteredRequest:NSFetchRequest<Projects> = Projects.fetchRequest()
+                let pred = NSPredicate(format: "name CONTAINS '\(searchText)'")
+                
+                filteredRequest.predicate = pred
+                
+                self.projects = try context.fetch(filteredRequest)
+                
+                DispatchQueue.main.async {
+                    self.projects_progress.reloadData()
+                }
+            }
+            
+            catch
+            {
+                
+            }
+        }
+    }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        fetchProject()
+        searchBar.showsCancelButton = false
+    }
 
 }

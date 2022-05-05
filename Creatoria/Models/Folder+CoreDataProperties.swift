@@ -23,9 +23,11 @@ extension Folder {
     {
         get
         {
+            
             return asset?.allObjects as? [Assets]
         }
     }
+    
 
 }
 

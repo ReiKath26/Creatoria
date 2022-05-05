@@ -87,6 +87,7 @@ class AddProjectController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setPickerView()
         symbolPreview.image = UIImage(systemName: symbolNames[index])
         symbolPreview.tintColor = UIColor.periwinkle
         // Do any additional setup after loading the view.

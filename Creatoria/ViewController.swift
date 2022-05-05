@@ -12,9 +12,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     let filter_image = ["Vector icon", "Pic Icon", "Video icon", "CD"]
     let filter_text = ["All", "Images", "Video", "Sound"]
-    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var filter_catalog: UICollectionView!
     @IBOutlet var assetTable: UITableView!
+    
+    var index = 0
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -26,9 +27,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openAlert))
         
         addButton.tintColor = UIColor.periwinkle
-//        dummyData()
+        dummyData()
         fetchFolder()
-        print(folders.count)
         
         navigationItem.rightBarButtonItem = addButton
         // Do any additional setup after loading the view.
@@ -105,7 +105,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         newAsset6.duration = 120
         newAsset6.file_extension = "mov"
         newAsset6.desc = "Person gathering"
-        newAsset1.file_type = "Video"
+        newAsset6.file_type = "Video"
         
         let newAsset7 = Assets(context: self.context)
         newAsset7.name = "vid_0002"
@@ -145,7 +145,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         newAsset10.symbol = "music.note"
         newAsset10.duration = 180
         newAsset10.desc = "Jamming BGM"
-        newAsset7.file_type = "Sounds"
+        newAsset10.file_type = "Sounds"
         
         let dummyProject1 = Projects(context: self.context)
         dummyProject1.name = "Project XXXX"
@@ -165,19 +165,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         asset1.isSet = false
         
         let asset2 = AsseProj(context: self.context)
-        asset2.name = "Video X"
-        asset2.type = "Video"
-        asset2.isSet = true
+        asset2.name = "Sounds X"
+        asset2.type = "Sounds"
+        asset2.isSet = false
         
         let asset3 = AsseProj(context: self.context)
         asset3.name = "Image X"
-        asset3.type = "Video"
+        asset3.type = "Image"
         asset3.isSet = true
         
         let asset4 = AsseProj(context: self.context)
-        asset4.name = "Image X"
+        asset4.name = "Video X"
         asset4.type = "Video"
-        asset4.isSet = false
+        asset4.isSet = true
         
         let asset5 = AsseProj(context: self.context)
         asset5.name = "Video X"
@@ -185,7 +185,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         asset5.isSet = false
         
         newAsset2.addToIntoProject(asset3)
-        newAsset6.addToIntoProject(asset2)
+        newAsset6.addToIntoProject(asset4)
         
         dummyProject1.addToAssets(asset4)
         dummyProject1.addToAssets(asset5)
@@ -216,10 +216,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "catalog_filter", for: indexPath) as? CatalogCategory)!
         
+        if index == indexPath.row
+        {
+            cell.backgroundColor = UIColor.periwinkle
+        }
         cell.filter_icon.image = UIImage(named: filter_image[indexPath.row])
         cell.filter_name.text = filter_text[indexPath.row]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        index = indexPath.row
+        print(index)
+        filter_catalog.reloadData()
+        assetTable.reloadData()
     }
     
     @objc func openAlert()
@@ -248,17 +259,97 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folders[section].asset?.count ?? 0
+        
+        if index == 1
+        {
+            let predicate = NSPredicate(format: "file_type CONTAINS 'Image'")
+            
+            return folders[section].asset?.filtered(using: predicate).count ?? 0
+        }
+        
+        else if index == 2
+        {
+            let predicate = NSPredicate(format: "file_type CONTAINS 'Video'")
+            return folders[section].asset?.filtered(using: predicate).count ?? 0
+        }
+        
+        else if index == 3
+        {
+            let predicate = NSPredicate(format: "file_type CONTAINS 'Sounds'")
+            return folders[section].asset?.filtered(using: predicate).count ?? 0
+        }
+        
+        else
+        {
+            return folders[section].asset?.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "asset_cell", for: indexPath) as! AssetTableCell
-        cell.imageAsset.image = UIImage(systemName: folders[indexPath.section].assetArray?[indexPath.row].symbol ?? "snowflake")
         
-        let name: String = folders[indexPath.section].assetArray?[indexPath.row].name ?? ""
-        let ext: String = folders[indexPath.section].assetArray?[indexPath.row].file_extension ?? ""
-        cell.assetName.text = "\(name).\(ext)"
-        cell.imageAsset.tintColor = UIColor.periwinkle
+        var imageArray : [Assets] = []
+        var videoArray : [Assets] = []
+        var soundsArray : [Assets] = []
+        
+        for x in 0..<folders[indexPath.section].assetArray!.count
+        {
+            if folders[indexPath.section].assetArray?[x].file_type == "Image"
+            {
+                imageArray.append(folders[indexPath.section].assetArray![x])
+            }
+            
+            else if folders[indexPath.section].assetArray?[x].file_type == "Video"
+            {
+                videoArray.append(folders[indexPath.section].assetArray![x])
+            }
+            
+            else if folders[indexPath.section].assetArray?[x].file_type == "Sounds"
+            {
+                soundsArray.append(folders[indexPath.section].assetArray![x])
+            }
+        }
+        
+        if index == 1
+        {
+            cell.imageAsset.image = UIImage(systemName: imageArray[indexPath.row].symbol ?? "snowflake")
+            
+            let name: String = imageArray[indexPath.row].name ?? ""
+            let ext: String = imageArray[indexPath.row].file_extension ?? ""
+            cell.assetName.text = "\(name).\(ext)"
+            cell.imageAsset.tintColor = UIColor.periwinkle
+        }
+        
+        else if index == 2
+        {
+            cell.imageAsset.image = UIImage(systemName: videoArray[indexPath.row].symbol ?? "snowflake")
+            
+            let name: String = videoArray[indexPath.row].name ?? ""
+            let ext: String = videoArray[indexPath.row].file_extension ?? ""
+            cell.assetName.text = "\(name).\(ext)"
+            cell.imageAsset.tintColor = UIColor.periwinkle
+        }
+        
+        else if index == 3
+        {
+            cell.imageAsset.image = UIImage(systemName: soundsArray[indexPath.row].symbol ?? "snowflake")
+            
+            let name: String = soundsArray[indexPath.row].name ?? ""
+            let ext: String = soundsArray[indexPath.row].file_extension ?? ""
+            cell.assetName.text = "\(name).\(ext)"
+            cell.imageAsset.tintColor = UIColor.periwinkle
+        }
+        
+        else
+        {
+            cell.imageAsset.image = UIImage(systemName: folders[indexPath.section].assetArray?[indexPath.row].symbol ?? "snowflake")
+            
+            let name: String = folders[indexPath.section].assetArray?[indexPath.row].name ?? ""
+            let ext: String = folders[indexPath.section].assetArray?[indexPath.row].file_extension ?? ""
+            cell.assetName.text = "\(name).\(ext)"
+            cell.imageAsset.tintColor = UIColor.periwinkle
+        }
+       
         return cell
     }
     
