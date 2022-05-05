@@ -28,14 +28,32 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         addButton.tintColor = UIColor.periwinkle
         dummyData()
-        fetchFolder()
+        checkData()
         
         navigationItem.rightBarButtonItem = addButton
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func checkData()
+    {
         fetchFolder()
+        
+        if folders.isEmpty
+        {
+            filter_catalog.isHidden = true
+            assetTable.isHidden = true
+            
+        }
+        
+        else
+        {
+            filter_catalog.isHidden = false
+            assetTable.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        checkData()
         
     }
     
