@@ -306,6 +306,14 @@ class AddSoundController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 folder.addToAsset(newSounds)
             }
         }
+        
+        else
+        {
+            let folder = Folder(context: self.context)
+            folder.directory = file_locationTextField.text
+            folder.addToAsset(newSounds)
+        }
+        
         newSounds.desc = descTextField.text
         newSounds.duration = Double(durationBar.value)
         

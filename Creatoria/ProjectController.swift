@@ -18,6 +18,23 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var projects_progress : UICollectionView!
     
+    private let bookImage: UIImageView =
+    {
+        let imageView = UIImageView(frame: CGRect(x: 46, y: 300, width: 307, height: 206))
+        imageView.image = UIImage(named: "Book Blue")
+        return imageView
+        
+    }()
+    
+    private let textEmpty: UILabel =
+    {
+        let textLabel = UILabel(frame: CGRect(x: -30, y: 500, width: 500, height: 100))
+        textLabel.text = "No Project added yet...."
+        textLabel.textAlignment = .center
+        textLabel.textColor = UIColor.lightGray
+        return textLabel
+    }()
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
 //    func viewdidload{
@@ -43,6 +60,7 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
     
     override func viewWillAppear(_ animated: Bool) {
         fetchProject()
+        checkData()
     }
 
     
@@ -119,6 +137,8 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
           navigationItem.rightBarButtonItem = addButton
         
         checkData()
+        view.addSubview(bookImage)
+        view.addSubview(textEmpty)
         // Do any additional setup after loading the view.
     }
     
@@ -133,12 +153,16 @@ class ProjectController: UIViewController, UICollectionViewDataSource, UICollect
         {
             searchBar.isHidden = true
             projects_progress.isHidden = true
+            bookImage.isHidden = false
+            textEmpty.isHidden = false
         }
         
         else
         {
             searchBar.isHidden = false
             projects_progress.isHidden = false
+            bookImage.isHidden = true
+            textEmpty.isHidden = true
         }
     }
     

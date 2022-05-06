@@ -307,6 +307,14 @@ class AddVideoController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 folder.addToAsset(newVideo)
             }
         }
+        
+        else
+        {
+            let folder = Folder(context: self.context)
+            folder.directory = file_locationTextField.text
+            folder.addToAsset(newVideo)
+        }
+        
         newVideo.desc = descTextField.text
         newVideo.duration = Double(durationBar.value)
         

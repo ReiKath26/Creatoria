@@ -36,6 +36,7 @@
 		14838B6F281B1AEC00C3971F /* Assets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B6D281B1AEC00C3971F /* Assets+CoreDataClass.swift */; };
 		14838B70281B1AEC00C3971F /* Assets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B6E281B1AEC00C3971F /* Assets+CoreDataProperties.swift */; };
 		14838B72281B20A200C3971F /* AssetCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */; };
+		14C7D41328251D62000127AE /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7D41228251D62000127AE /* LaunchScreenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		14838B6D281B1AEC00C3971F /* Assets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assets+CoreDataClass.swift"; sourceTree = "<group>"; };
 		14838B6E281B1AEC00C3971F /* Assets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCellTableViewCell.swift; sourceTree = "<group>"; };
+		14C7D41228251D62000127AE /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				144CA18028199E410060A00D /* CatalogCategory.swift */,
 				144CA0EC2819371B0060A00D /* ViewController.swift */,
 				144CA1662819673B0060A00D /* ProjectController.swift */,
+				14C7D41228251D62000127AE /* LaunchScreenController.swift */,
 				14838B07281ABB4D00C3971F /* ProjectTableCell.swift */,
 				144CA0EE2819371B0060A00D /* Main.storyboard */,
 				144CA0F42819371C0060A00D /* Assets.xcassets */,
@@ -218,6 +221,7 @@
 				144CA1672819673B0060A00D /* ProjectController.swift in Sources */,
 				14838B6A281B17A400C3971F /* Folder+CoreDataProperties.swift in Sources */,
 				14838B67281B17A400C3971F /* AsseProj+CoreDataClass.swift in Sources */,
+				14C7D41328251D62000127AE /* LaunchScreenController.swift in Sources */,
 				144CA0F32819371B0060A00D /* Creatoria.xcdatamodeld in Sources */,
 				144CA0ED2819371B0060A00D /* ViewController.swift in Sources */,
 				14838B66281B17A400C3971F /* Projects+CoreDataProperties.swift in Sources */,

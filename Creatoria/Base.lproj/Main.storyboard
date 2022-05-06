@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KO8-JQ-GZk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hNx-xs-QR0">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -893,6 +893,9 @@
                                                                         <rect key="frame" x="0.0" y="28" width="350" height="34"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="fileLocationChanged:" destination="dYP-rC-64F" eventType="editingChanged" id="6Kv-YV-AJW"/>
+                                                                        </connections>
                                                                     </textField>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validate type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKf-kn-voi">
                                                                         <rect key="frame" x="0.0" y="67" width="350" height="13.333333333333329"/>
@@ -1489,7 +1492,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="7re-6u-sQU">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="KO8-JQ-GZk" customClass="TabBarController" customModule="Creatoria" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabView" automaticallyAdjustsScrollViewInsets="NO" id="KO8-JQ-GZk" customClass="TabBarController" customModule="Creatoria" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ijc-Cf-1Bw">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1579,15 +1582,66 @@
             </objects>
             <point key="canvasLocation" x="4190.7692307692305" y="-28.436018957345969"/>
         </scene>
+        <!--Launch Screen Controller-->
+        <scene sceneID="RVh-sE-pdd">
+            <objects>
+                <viewController id="hNx-xs-QR0" customClass="LaunchScreenController" customModule="Creatoria" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YBS-fc-kQR">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Book Color" translatesAutoresizingMaskIntoConstraints="NO" id="sRg-EE-BAs">
+                                <rect key="frame" x="46" y="345" width="307" height="206"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREATORIA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YzW-la-aYS">
+                                <rect key="frame" x="75" y="559" width="264" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Picture color" translatesAutoresizingMaskIntoConstraints="NO" id="Ywq-V8-uK8">
+                                <rect key="frame" x="46" y="325" width="58" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sound color" translatesAutoresizingMaskIntoConstraints="NO" id="Ezl-E7-qXV">
+                                <rect key="frame" x="281" y="325" width="58" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Video color" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-Ji-air">
+                                <rect key="frame" x="170" y="279" width="58" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EaW-gc-WMc"/>
+                        <color key="backgroundColor" name="Periwinkle Blue"/>
+                    </view>
+                    <connections>
+                        <outlet property="bookImage" destination="sRg-EE-BAs" id="1SB-L9-JBN"/>
+                        <outlet property="creatoriaLabel" destination="YzW-la-aYS" id="v0s-Vs-e2y"/>
+                        <outlet property="pictureImage" destination="Ywq-V8-uK8" id="2bd-dX-9Ti"/>
+                        <outlet property="soundsImage" destination="Ezl-E7-qXV" id="eyd-0S-Ulw"/>
+                        <outlet property="videoImage" destination="6Sg-Ji-air" id="D24-hp-2Rp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V6o-9v-kQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1014" y="155"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Book Color" width="300" height="211"/>
+        <image name="Picture color" width="213" height="202"/>
+        <image name="Sound color" width="213" height="202"/>
+        <image name="Video color" width="213" height="202"/>
         <image name="gearshape.2.fill" catalog="system" width="128" height="100"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="100"/>
         <namedColor name="Accent Gray">
             <color red="0.80784313725490198" green="0.83921568627450982" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Periwinkle Blue">
-            <color red="0.54901963472366333" green="0.70980393886566162" blue="0.93725490570068359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48235297203063965" green="0.67058825492858887" blue="0.92941176891326904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Rosy Pink">
             <color red="0.96862745098039216" green="0.67450980392156867" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

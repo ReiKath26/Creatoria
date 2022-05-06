@@ -262,6 +262,7 @@ class AddImageController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         newImage.source = sourceTextField.text
         newImage.file_extension = file_extensionTextField.text
         newImage.file_type = "Image"
+        newImage.desc = descTextField.text
         
         if !folders.isEmpty
         {
@@ -289,7 +290,14 @@ class AddImageController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 folder.addToAsset(newImage)
             }
         }
-        newImage.desc = descTextField.text
+        
+        else
+        {
+            let folder = Folder(context: self.context)
+            folder.directory = file_locationTextField.text
+            folder.addToAsset(newImage)
+        }
+      
         
         let alert = UIAlertController(title: "Success", message: "Successfully add asset!", preferredStyle: .alert)
         

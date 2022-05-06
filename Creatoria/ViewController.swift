@@ -21,6 +21,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var folders = [Folder]()
     
+    private let bookImage: UIImageView =
+    {
+        let imageView = UIImageView(frame: CGRect(x: 85, y: 300, width: 200, height: 200))
+        imageView.image = UIImage(named: "Picture blue")
+        return imageView
+        
+    }()
+    
+    private let textEmpty: UILabel =
+    {
+        let textLabel = UILabel(frame: CGRect(x: -50, y: 470, width: 500, height: 100))
+        textLabel.text = "No asset added yet...."
+        textLabel.textAlignment = .center
+        textLabel.textColor = UIColor.lightGray
+        return textLabel
+    }()
+    
+    var imageArray : [Assets] = []
+    var videoArray : [Assets] = []
+    var soundsArray : [Assets] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +50,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         addButton.tintColor = UIColor.periwinkle
         dummyData()
         checkData()
-        
+        view.addSubview(bookImage)
+        view.addSubview(textEmpty)
+        print(folders.count)
         navigationItem.rightBarButtonItem = addButton
         // Do any additional setup after loading the view.
     }
@@ -42,6 +65,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         {
             filter_catalog.isHidden = true
             assetTable.isHidden = true
+            bookImage.isHidden = false
+            textEmpty.isHidden = false
             
         }
         
@@ -49,12 +74,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         {
             filter_catalog.isHidden = false
             assetTable.isHidden = false
+            bookImage.isHidden = true
+            textEmpty.isHidden = true
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         checkData()
-        
+        print(folders.count)
     }
     
     func dummyData()
@@ -236,7 +263,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         if index == indexPath.row
         {
-            cell.backgroundColor = UIColor.periwinkle
+            UIView.animate(withDuration: 1) {
+                cell.backgroundColor = UIColor.periwinkle
+            }
+            
         }
         cell.filter_icon.image = UIImage(named: filter_image[indexPath.row])
         cell.filter_name.text = filter_text[indexPath.row]
@@ -306,9 +336,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "asset_cell", for: indexPath) as! AssetTableCell
         
-        var imageArray : [Assets] = []
-        var videoArray : [Assets] = []
-        var soundsArray : [Assets] = []
+        imageArray.removeAll()
+        videoArray.removeAll()
+        soundsArray.removeAll()
         
         for x in 0..<folders[indexPath.section].assetArray!.count
         {
@@ -377,22 +407,96 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let title = folders[section].directory
+        
         return title
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        var frame = view.frame
+        
+        UIView.animate(withDuration: 0.5, delay: 0.1) {
+            frame.origin.y = frame.origin.y - 100
+            view.frame = frame
+        } completion: { success in
+            frame.origin.y = frame.origin.y + 100
+            view.frame = frame
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        var frame = cell.contentView.frame
+        
+        UIView.animate(withDuration: 0.5, delay: 0.1) {
+            frame.origin.y = -50
+            cell.contentView.frame = frame
+        } completion: { success in
+            frame.origin.y = 0
+            cell.contentView.frame = frame
+        }
+
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        imageArray.removeAll()
+        videoArray.removeAll()
+        soundsArray.removeAll()
+        
+        for x in 0..<folders[indexPath.section].assetArray!.count
+        {
+            if folders[indexPath.section].assetArray?[x].file_type == "Image"
+            {
+                imageArray.append(folders[indexPath.section].assetArray![x])
+            }
+            
+            else if folders[indexPath.section].assetArray?[x].file_type == "Video"
+            {
+                videoArray.append(folders[indexPath.section].assetArray![x])
+            }
+            
+            else if folders[indexPath.section].assetArray?[x].file_type == "Sounds"
+            {
+                soundsArray.append(folders[indexPath.section].assetArray![x])
+            }
+        }
+
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "asset_detail") as! Asset_detail
-        vc.asset = folders[indexPath.section].assetArray?[indexPath.row]
+        
+        if index == 1
+        {
+            vc.asset = imageArray[indexPath.row]
+        }
+        
+        else if index == 2
+        {
+            vc.asset = videoArray[indexPath.row]
+        }
+        
+        else if index == 3
+        {
+            vc.asset = soundsArray[indexPath.row]
+        }
+        
+        else
+        {
+            vc.asset = folders[indexPath.section].assetArray?[indexPath.row]
+        }
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func fetchFolder()
     {
-        let fetchReq: NSFetchRequest<Folder> = Folder.fetchRequest()
         
+        let fetchReq: NSFetchRequest<Folder> = Folder.fetchRequest()
+        let sortDecript = NSSortDescriptor(key: "directory", ascending: true)
+        
+        fetchReq.sortDescriptors = [sortDecript]
         do
         {
             folders = try context.fetch(fetchReq)
+            
             DispatchQueue.main.async
             {
                 self.assetTable.reloadData()
