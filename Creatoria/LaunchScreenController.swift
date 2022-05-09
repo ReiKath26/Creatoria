@@ -64,14 +64,14 @@ class LaunchScreenController: UIViewController {
     
     private func animate()
     {
-        UIView.animate(withDuration: 2, delay: 0, options: [.autoreverse, .repeat, .curveEaseInOut]) {
+        UIView.animate(withDuration: 1.5, delay: 0, options: [.autoreverse, .repeat, .curveEaseInOut]) {
             self.bookImage.frame = CGRect(x: 46, y: 360, width: 307, height: 206)
             self.pictureImage.frame = CGRect(x: 46, y: 335, width: 58, height: 58)
             self.videoImage.frame = CGRect(x: 170, y: 250, width: 58, height: 58)
             self.soundsImage.frame = CGRect(x: 281, y: 350, width: 58, height: 58)
         }
 
-        UIView.animate(withDuration: 6, delay: 0.5) {
+        UIView.animate(withDuration: 5, delay: 0.5) {
             self.bookImage.alpha = 0
             self.pictureImage.alpha = 0
             self.videoImage.alpha = 0

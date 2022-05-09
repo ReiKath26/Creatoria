@@ -81,7 +81,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewWillAppear(_ animated: Bool) {
         checkData()
-        print(folders.count)
     }
     
     func dummyData()
@@ -268,6 +267,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
             
         }
+        else
+        {
+            UIView.animate(withDuration: 1) {
+                cell.backgroundColor = UIColor.systemGray3
+            }
+        }
         cell.filter_icon.image = UIImage(named: filter_image[indexPath.row])
         cell.filter_name.text = filter_text[indexPath.row]
         
@@ -276,7 +281,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         index = indexPath.row
-        print(index)
         filter_catalog.reloadData()
         assetTable.reloadData()
     }
@@ -413,7 +417,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         var frame = view.frame
-        
+
         UIView.animate(withDuration: 0.5, delay: 0.1) {
             frame.origin.y = frame.origin.y - 100
             view.frame = frame

@@ -37,6 +37,9 @@ class Asset_detail: UIViewController, UITableViewDelegate, UITableViewDataSource
         value.append(asset?.type ?? "No type")
     
         value.append("\(asset?.duration ?? 0)" )
+        
+        let directory : String = asset?.folder?.directory ?? ""
+        headText.text = "File folder: \(directory)"
     
         let nameee: String = asset?.name ?? ""
         let ext: String = asset?.file_extension ?? ""
