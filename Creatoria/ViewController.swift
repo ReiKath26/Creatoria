@@ -48,7 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openAlert))
         
         addButton.tintColor = UIColor.periwinkle
-        dummyData()
+//        dummyData()
         checkData()
         view.addSubview(bookImage)
         view.addSubview(textEmpty)
@@ -110,27 +110,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         newAsset2.name = "img_0002"
         newAsset2.type = "Photo"
         newAsset2.source = "Camera Canon 4D"
-        newAsset2.symbol = "leaf.fill"
+        newAsset2.symbol = "sun.max.fill"
         newAsset2.file_extension = "jpeg"
-        newAsset2.desc = "Picture of leaf"
+        newAsset2.desc = "Beach Picture"
         newAsset2.file_type = "Image"
         
         let newAsset3 = Assets(context: self.context)
         newAsset3.name = "img_0003"
         newAsset3.type = "Photo"
         newAsset3.source = "Camera Canon 4D"
-        newAsset3.symbol = "leaf.fill"
+        newAsset3.symbol = "cloud.fill"
         newAsset3.file_extension = "jpeg"
-        newAsset3.desc = "Picture of leaf"
+        newAsset3.desc = "Image of clear blue sky"
         newAsset3.file_type = "Image"
         
         let newAsset4 = Assets(context: self.context)
         newAsset4.name = "img_0004"
         newAsset4.type = "Photo"
         newAsset4.source = "Camera Canon 4D"
-        newAsset4.symbol = "leaf.fill"
+        newAsset4.symbol = "moon.fill"
         newAsset4.file_extension = "jpeg"
-        newAsset4.desc = "Picture of leaf"
+        newAsset4.desc = "Moon Picture"
         newAsset4.file_type = "Image"
         
         let newAsset5 = Assets(context: self.context)
@@ -183,50 +183,50 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         newAsset9.file_type = "Video"
         
         let newAsset10 = Assets(context: self.context)
-        newAsset10.name = "jamming"
+        newAsset10.name = "bird_chirp"
         newAsset10.file_extension = "mp3"
         newAsset10.type = "BGM"
         newAsset10.source = "SoundFlix"
         newAsset10.symbol = "music.note"
         newAsset10.duration = 180
-        newAsset10.desc = "Jamming BGM"
+        newAsset10.desc = "Bird Chirping"
         newAsset10.file_type = "Sounds"
         
         let dummyProject1 = Projects(context: self.context)
-        dummyProject1.name = "Project XXXX"
+        dummyProject1.name = "Winter Promotion"
         dummyProject1.type = "Edit Video"
-        dummyProject1.desc = "This is edit video project for XXXX"
+        dummyProject1.desc = "Edit video for Winter Promotion"
         dummyProject1.symbol = "snowflake"
         
         let dummyProject2 = Projects(context: self.context)
-        dummyProject2.name = "Project NN"
+        dummyProject2.name = "Summer Party Poster"
         dummyProject2.type = "Design"
-        dummyProject2.desc = "This is design project for XXXX"
+        dummyProject2.desc = "Design Summer Poster for School"
         dummyProject2.symbol = "sun.max.fill"
         
         let asset1 = AsseProj(context: self.context)
-        asset1.name = "Video X"
-        asset1.type = "Video"
+        asset1.name = "Model Image"
+        asset1.type = "Image"
         asset1.isSet = false
         
         let asset2 = AsseProj(context: self.context)
-        asset2.name = "Sounds X"
-        asset2.type = "Sounds"
+        asset2.name = "Blue Sky Image"
+        asset2.type = "Image"
         asset2.isSet = false
         
         let asset3 = AsseProj(context: self.context)
-        asset3.name = "Image X"
+        asset3.name = "Beach Image"
         asset3.type = "Image"
         asset3.isSet = true
         
         let asset4 = AsseProj(context: self.context)
-        asset4.name = "Video X"
+        asset4.name = "Winter Street Vid"
         asset4.type = "Video"
         asset4.isSet = true
         
         let asset5 = AsseProj(context: self.context)
-        asset5.name = "Video X"
-        asset5.type = "Video"
+        asset5.name = "Chirp Bird Sound"
+        asset5.type = "Sound"
         asset5.isSet = false
         
         newAsset2.addToIntoProject(asset3)

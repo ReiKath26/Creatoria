@@ -135,6 +135,21 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func deleteAssets(item: AsseProj)
+    {
+        context.delete(item)
+        
+        do
+        {
+            try context.save()
+        }
+        
+        catch
+        {
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentIndex == 0
         {
@@ -150,13 +165,29 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     
         let setAction : UITableViewRowAction
+        let deleteAction: UITableViewRowAction
         
             if segmentIndex == 1
             {
+                
+                deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { _, indexPath in
+                    
+                    let alert = UIAlertController(title: "Delete Asset", message: "Are you sure you want to delete this item from this project?", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [self]_ in
+                        self.deleteAssets(item: (project?.assetArray?[indexPath.row])!)
+                        detailTable.reloadData()
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: { _ in
+                        alert.dismiss(animated: true)
+                    }))
+                    
+                    self.present(alert, animated: true)
+                })
+                
                 let setActionTitle = project?.assetArray?[indexPath.row].isSet ?? false ? "Unsset" : "Set"
                 setAction = UITableViewRowAction(style: .default, title: setActionTitle) { [self]_, indexPath in
-                    
-                    print(project?.assetArray?[indexPath.row].type)
         
                     if !(project?.assetArray?[indexPath.row].isSet ?? false) || project?.assetArray?[indexPath.row].isSet == nil
                     {
@@ -235,14 +266,18 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
         
         else
         {
-            setAction = UITableViewRowAction(style: .default, title: "Check", handler: { _, indexPath in
+            setAction = UITableViewRowAction(style: .default, title: "", handler: { _, indexPath in
+                
+            })
+            
+            deleteAction = UITableViewRowAction(style: .default, title: "", handler: { _, indexPath in
                 
             })
         }
         
         setAction.backgroundColor = UIColor.sunnyYellow
             
-        return [setAction]
+        return [setAction, deleteAction]
        
     }
     
@@ -256,7 +291,8 @@ class Project_detail: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let name : String = chooseAsset[row].name ?? ""
         let ext : String = chooseAsset[row].file_extension ?? ""
-        label.text = "\(name).\(ext)"
+        let desc : String = chooseAsset[row].desc ?? ""
+        label.text = "\(name).\(ext): \(desc)"
         label.sizeToFit()
         return label
     }
