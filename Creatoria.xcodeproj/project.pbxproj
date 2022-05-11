@@ -106,17 +106,14 @@
 			children = (
 				144CA145281941C40060A00D /* Models */,
 				144CA0E82819371B0060A00D /* AppDelegate.swift */,
+				147920AE28290B2400202746 /* FormClass */,
 				144CA16228194AAB0060A00D /* Extension.swift */,
 				14838B09281ACE4300C3971F /* AssetTableCell.swift */,
 				144CA0EA2819371B0060A00D /* SceneDelegate.swift */,
 				144CA16428194C780060A00D /* TabBarController.swift */,
-				144CA17E281988A40060A00D /* AddSoundController.swift */,
-				144CA17C2819888F0060A00D /* AddVideoController.swift */,
-				144CA17A281981160060A00D /* AddProjectController.swift */,
 				14838B71281B20A200C3971F /* AssetCellTableViewCell.swift */,
 				14838B3B281AEC0B00C3971F /* Asset_detail.swift */,
 				144CA1822819B05E0060A00D /* Project_detail.swift */,
-				144CA178281980FA0060A00D /* AddImageController.swift */,
 				144CA18028199E410060A00D /* CatalogCategory.swift */,
 				144CA0EC2819371B0060A00D /* ViewController.swift */,
 				144CA1662819673B0060A00D /* ProjectController.swift */,
@@ -145,6 +142,17 @@
 				14838B62281B17A400C3971F /* Folder+CoreDataProperties.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		147920AE28290B2400202746 /* FormClass */ = {
+			isa = PBXGroup;
+			children = (
+				144CA17E281988A40060A00D /* AddSoundController.swift */,
+				144CA17C2819888F0060A00D /* AddVideoController.swift */,
+				144CA17A281981160060A00D /* AddProjectController.swift */,
+				144CA178281980FA0060A00D /* AddImageController.swift */,
+			);
+			path = FormClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
